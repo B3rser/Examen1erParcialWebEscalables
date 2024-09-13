@@ -3,6 +3,6 @@
     <app-new-show-form (createElement)="createElement($event)"></app-new-show-form>
     <app-filters (sortAlpha)="sortAlpha()" (reverseOrder)="reverseOrder()"></app-filters>
   </div>
-  
-  <app-show-list [shows]="shows" (deleteCard)="deleteElement($event)"></app-show-list>
+  <app-edit-show-form [show]="editShow" [isActive]="isActive" (editElement)="onEditElement($event)"></app-edit-show-form>
+  <app-show-list [shows]="shows" (deleteCard)="deleteElement($event)" (editCard)="editElement($event)"></app-show-list>
 </div>

@@ -5,16 +5,28 @@ import { Show } from './interfaces/show.interface';
 import { NewShowFormComponent } from "./components/new-show-form/new-show-form.component";
 import { ShowListComponent } from "./components/show-list/show-list.component";
 import { FiltersComponent } from "./components/filters/filters.component";
+import { EditShowFormComponent } from "./components/edit-show-form/edit-show-form.component";
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, NgbNavModule, NewShowFormComponent, ShowListComponent, FiltersComponent],
+    imports: [RouterOutlet, NgbNavModule, NewShowFormComponent, ShowListComponent, FiltersComponent, EditShowFormComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css'
 })
 
 export class AppComponent {
+    public editShow: Show = {
+        name: "",
+        description: "",
+        image: "",
+        year: 0,
+        episodes: 0,
+        genre: "",
+        likes: [],
+    };
+
+    public isActive: boolean = false;
 
     public shows: Show[] = [
         {
@@ -167,6 +179,30 @@ export class AppComponent {
         this.shows = this.shows.filter(show => show.name != name)
     }
 
+    public editElement(show: Show): void {
+        this.editShow = show;
+        this.isActive = true;
+    }
+
+    public onEditElement(updatedShow: Show): void {
+        const index = this.shows.findIndex(show => show.name === this.editShow.name);
+        this.editShow = {
+            name: "",
+            description: "",
+            image: "",
+            year: 0,
+            episodes: 0,
+            genre: "",
+            likes: [],
+        };
+        if (index !== -1) {
+            this.shows[index] = updatedShow;
+            this.isActive = false;
+        } else {
+            console.log('Something went wrong');
+        }
+    }
+
     public createElement(show: Show): void {
         this.shows.push(show);
     }
@@ -175,7 +211,7 @@ export class AppComponent {
         this.shows.sort((a, b) => a.name.localeCompare(b.name));
     }
 
-    public reverseOrder(): void{
+    public reverseOrder(): void {
         this.shows.reverse();
     }
 }

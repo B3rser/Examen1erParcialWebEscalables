@@ -15,10 +15,17 @@ export class ShowListComponent {
   @Output()
   public deleteCard: EventEmitter<string> = new EventEmitter();
 
+  @Output()
+  public editCard: EventEmitter<Show> = new EventEmitter();
+
   @Input()
   public shows: Show[] = [];
 
   public deleteElement(name: string): void {
     this.deleteCard.emit(name);
+  }
+
+  public editElement(show: Show): void {
+    this.editCard.emit(show);
   }
 }

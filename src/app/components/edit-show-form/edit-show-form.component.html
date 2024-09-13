@@ -1,0 +1,19 @@
+<div *ngIf="isActive" class="container d-flex align-items-center justify-content-around">
+    <form [formGroup]="form" (ngSubmit)="onFormSubmit()" class="row g-3">
+        <div class="col-auto">
+            <input type="text" formControlName="name" class="form-control" placeholder="Nombre">
+        </div>
+        <div class="col-auto">
+            <input type="text" formControlName="description" class="form-control" placeholder="Descripcion">
+        </div>
+        <div class="col-auto">
+            <input type="text" formControlName="image" class="form-control" placeholder="Imagen">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Editar</button>
+        </div>
+        <div *ngIf="!form.valid && isFormSubmitted" class="alert alert-danger" role="alert">
+            Datos incompletos
+        </div>
+    </form>
+</div>

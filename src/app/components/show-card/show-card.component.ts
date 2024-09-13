@@ -14,6 +14,9 @@ export class ShowCardComponent {
   @Output()
   public deleteCard: EventEmitter<string> = new EventEmitter();
   
+  @Output()
+  public editCard: EventEmitter<Show> = new EventEmitter();
+
   @Input()
   public show: Show = {
     name: "",
@@ -33,5 +36,9 @@ export class ShowCardComponent {
 
   public onDeleteCard(){
     this.deleteCard.emit(this.show.name);
+  }
+
+  public onEditCard(){
+    this.editCard.emit(this.show);
   }
 }
